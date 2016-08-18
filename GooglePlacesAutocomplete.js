@@ -506,7 +506,7 @@ const GooglePlacesAutocomplete = React.createClass({
             >
               {rowData.description}
             </Text>
-            {this._renderLoader(rowData)}
+            {/*{this._renderLoader(rowData)}*/}
           </View>
           <View style={[defaultStyles.separator, this.props.styles.separator]} />
         </View>
