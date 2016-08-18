@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { TextInput, View, ListView, Image, Text, Dimensions, TouchableHighlight, TouchableWithoutFeedback, Platform, ActivityIndicator, ProgressBarAndroid, PixelRatio } from 'react-native';
+import { TextInput, View, ListView, Image, Text, Dimensions, TouchableOpacity, TouchableWithoutFeedback, Platform, ActivityIndicator, ProgressBarAndroid, PixelRatio } from 'react-native';
 import Qs from 'qs';
 
 const defaultStyles = {
@@ -492,11 +492,10 @@ const GooglePlacesAutocomplete = React.createClass({
     rowData.description = rowData.description || rowData.formatted_address || rowData.name;
 
     return (
-      <TouchableHighlight
+      <TouchableOpacity
         onPress={() =>
           this._onPress(rowData)
         }
-        underlayColor="#c8c7cc"
       >
         <View>
           <View style={[defaultStyles.row, this.props.styles.row, rowData.isPredefinedPlace ? this.props.styles.specialItemRow : {}]}>
@@ -510,7 +509,7 @@ const GooglePlacesAutocomplete = React.createClass({
           </View>
           <View style={[defaultStyles.separator, this.props.styles.separator]} />
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     );
   },
 
@@ -576,6 +575,16 @@ const GooglePlacesAutocomplete = React.createClass({
             onFocus={onFocus ? () => {this._onFocus(); onFocus()} : this._onFocus}
             clearButtonMode="while-editing"
           />
+          {(this.props.currentLocationImage) ?
+            <TouchableOpacity
+              style={this.props.styles.currentLocation}
+              onPress={this.props.currentLocationAction}
+            >
+              <Image
+                source={this.props.currentLocationImage}
+              />
+            </TouchableOpacity> : null
+          }
         </View>
         {this._getListView()}
       </View>
